@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('postgres://postgres:a0s0d0f0ASDF!@127.0.0.1:5432/postgres');
+const { DB_PASSWORD } = process.env;
+
+const sequelize = new Sequelize(`postgres://postgres:${DB_PASSWORD}@127.0.0.1:5432/postgres`);
 
 sequelize.authenticate()
 .then(() => {
