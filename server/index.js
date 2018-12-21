@@ -1,9 +1,12 @@
 require ('dotenv').config();
 
-const express = require('express')
-const consola = require('consola')
+const express = require('express');
+const consola = require('consola');
+const bodyParser = require('body-parser');
+
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
+
 
 const api = require('../api');
 
@@ -25,6 +28,8 @@ async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+
+  app.use(bodyParser.json());
 
   app.use('/users', api);
 

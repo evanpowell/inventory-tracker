@@ -1,19 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const db = require('../database/schema');
-
 const app = express();
 
 app.use(bodyParser.json());
 
+app.use(session({
+  secret: 'super-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 3 * 24 * 60 * 60 * 1000 } // 3 days
+}));
+
 app.get('/test', (req, res) => {
   res.send('test passed');
-})
+});
 
-app.post('/login', (req, res) => {
-  console.log('hey');
-  res.send(req.query);
-})
+app.post('/login', );
 
 module.exports = app;
