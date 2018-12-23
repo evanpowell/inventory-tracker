@@ -1,0 +1,76 @@
+const armorAccessories = [
+  {
+    name: 'Tailored Cloak',
+    cost: 25,
+    weightMin: 6,
+    weightMax: 6,
+    attributeReq: null,
+    bonus: '+1 Avoidance',
+  },
+  {
+    name: 'Layered Robes',
+    cost: 30,
+    weightMin: 8,
+    weightMax: 8,
+    attributeReq: null,
+    bonus: '+2 Avoidance',
+  },
+  {
+    name: 'Rugged Cloak',
+    cost: 25,
+    weightMin: 15,
+    weightMax: 15,
+    attributeReq: ['STR', 11],
+    bonus: '+1 Protection Value',
+  },
+  {
+    name: 'Buckler Shield',
+    cost: 5,
+    weightMin: 2,
+    weightMax: 4,
+    attributeReq: ['STR', 7],
+    bonus: '+1 Protection Value',
+  },
+  {
+    name: 'Medium Shield',
+    cost: 15,
+    weightMin: 4,
+    weightMax: 8,
+    attributeReq: ['STR', 9],
+    bonus: '+2 Protection Value',
+  },
+  {
+    name: 'Large Shield',
+    cost: 30,
+    weightMin: 8,
+    weightMax: 20,
+    attributeReq: ['STR', 13],
+    bonus: '+3 Protection Value',
+  },
+  {
+    name: 'Jeweled Headband',
+    cost: 60,
+    weightMin: 2,
+    weightMax: 4,
+    attributeReq: ['CHA', 11],
+    bonus: '+2 Poise',
+  },
+  {
+    name: 'Decorative Scepter',
+    cost: 100,
+    weightMin: 5,
+    weightMax: 8,
+    attributeReq: ['CHA', 11],
+    bonus: '+3 Poise',
+  },
+  {
+    name: 'Kalmorian Legbands',
+    cost: 25,
+    weightMin: 2,
+    weightMax: 2,
+    attributeReq: ['AGI', 13],
+    bonus: '+10% Movement Rate',
+  }
+]
+
+module.exports = armorAccessories;
