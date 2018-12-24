@@ -2,10 +2,10 @@ const Sequelize = require('sequelize');
 
 const { DB_PASSWORD } = process.env;
 
-const sequelize = new Sequelize(`postgres://postgres:a0s0d0f0ASDF!@127.0.0.1:5432/augurs-lore-inventory-tracker`);
+const sequelize = new Sequelize(`postgres://postgres:${DB_PASSWORD}@127.0.0.1:5432/inventory-tracker`);
 
 const User = sequelize.define('user', {
-  userName: {
+  username: {
     type: Sequelize.STRING,
     unique: true
   },
@@ -51,7 +51,8 @@ const Item = sequelize.define('item', {
     type: Sequelize.BOOLEAN
   },
   custom: {
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   quality: {
     type: Sequelize.STRING

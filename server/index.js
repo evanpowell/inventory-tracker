@@ -3,12 +3,13 @@ require ('dotenv').config();
 const express = require('express');
 const consola = require('consola');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const Session = require('express-session');
+
+const authRoutes = require('./routes/authRoutes');
 
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
-
-
-const api = require('../api');
 
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
@@ -29,9 +30,21 @@ async function start() {
     await builder.build()
   }
 
-  app.use(bodyParser.json());
+  const session = Session({
+    secret: 'kittykatkeyboards',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 30 * 24 * 60 * 60 * 1000
+    }
+  });
 
-  app.use('/users', api);
+  app.use(bodyParser.json());
+  app.use(session);
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  app.use('/auth', authRoutes);
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
