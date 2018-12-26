@@ -3,6 +3,14 @@
     <div>
       <h1>Augur's Lore</h1>
       <h2>Inventory Tracker</h2>
+      <h3>Username {{ username }}</h3>
+      <!-- test of existin characters -->
+      <h4
+        v-if="characters.length"
+        v-for="character of characters"
+        :key="character.id">
+        {{ character.name }}
+      </h4>
       <div v-if="!isAuthChecked">
         Checking logged in status...
       </div>
@@ -144,7 +152,13 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
+
 export default {
+  computed: mapState([
+    'username',
+    'characters'
+  ]),
   data() {
     return {
       isLoggedIn: false,
@@ -175,7 +189,8 @@ export default {
         email: this.signupData.email,
         password: this.signupData.password
       }).then((data) => {
-        if (data === true) {
+        if (data) {
+          console.log(data);
           this.isLoggedIn = true;
           document.getElementById('signup-cancel').click();
         }
@@ -186,9 +201,12 @@ export default {
         username: this.loginData.usernameOrEmail,
         password: this.loginData.password
       }).then((data) => {
-        if (data === true) {
+        if (data) {
+          this.$store.commit('setUsernameAndCharacters', data);
           this.isLoggedIn = true;
           document.getElementById('login-cancel').click();
+          console.log('characters in state', this.characters);
+          console.log('username', this.username);
         };
       });
     },

@@ -70,11 +70,23 @@ const createUser = (userInfo) => {
         reject(err);
       });
   })
+};
+
+const getCharactersByUserId = (userId) => {
+  return Character.findAll({
+    where: {
+      userId
+    }
+  })
+  .then((characters) => {
+    return characters;
+  });
 }
 
 module.exports = {
   findUserLocal,
   findUserById,
   findOrCreateUserByGoogleID,
-  createUser
+  createUser,
+  getCharactersByUserId
 }

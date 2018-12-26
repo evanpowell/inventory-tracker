@@ -3,7 +3,10 @@ const passport = require('passport');
 
 require('./passportConfig');
 
-const { createUser } = require('../../database/queries');
+const {
+  createUser,
+  getCharactersByUserId
+} = require('../../database/queries');
 
 router.post('/signup', (req, res) => {
   console.log(req.body);
@@ -13,7 +16,7 @@ router.post('/signup', (req, res) => {
       if (err) {
         return res.status(500).send('Server Error');
       }
-      res.send(true);
+      return res.send(user.username);
     });
   });
 });
@@ -22,11 +25,18 @@ router.get('/test', (req, res) => {
   if (!req.user) {
     return res.send(false);
   }
-  return res.send(true);
+  // change response to'true', implement preliminary request from vuex store to init state
+  return res.send(req.user.username);
 });
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.send(true);
+  getCharactersByUserId(req.user.id)
+  .then((characters) => {
+    res.send({
+      username: req.user.username,
+      characters: characters
+    });
+  });
 });
 
 router.post('/logout', (req, res) => {

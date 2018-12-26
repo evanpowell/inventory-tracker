@@ -99,7 +99,7 @@ CustomAction.belongsTo(Character);
 sequelize.authenticate()
 .then(() => {
   console.log('Database connection established');
-  sequelize.sync({ force: true })
+  sequelize.sync({ force: false })
   .then(() => {
     console.log('Models synced');
   })
